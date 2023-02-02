@@ -39,7 +39,7 @@ class FloatingText extends Human {
 
     public $type = 0;
 	
-    public string $text = null;
+    public ?string $text = null;
 
     public function getName() : string {
 		return "FloatingText";
