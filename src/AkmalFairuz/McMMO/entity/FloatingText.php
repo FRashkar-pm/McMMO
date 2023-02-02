@@ -26,6 +26,8 @@ use pocketmine\network\mcpe\protocol\SetActorDataPacket;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataProperties;
 use pocketmine\network\mcpe\protocol\types\entity\EntityMetadataTypes;
 
+use pocketmine\network\mcpe\protocol\types\entity\StringMetadataProperty;
+
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\utils\TextFormat;
 
@@ -76,7 +78,7 @@ class FloatingText extends Human {
 	public function sendNameTag(Player $player): void {
         $pk = new SetActorDataPacket();
         $pk->actorRuntimeId = $this->getId();
-        $pk->metadata = $this->getNameTag();
+        $pk->metadata = [EntityMetadataProperties::NAMETAG => new StringMetadataProperty($this->getNameTag())];
         $player->getNetworkSession()->sendDataPacket($pk);
     }
 
