@@ -38,6 +38,8 @@ class FloatingText extends Human {
     public $updateTick = 0;
 
     public $type = 0;
+	
+    public string $text = null;
 
     public function getName() : string {
 		return "FloatingText";
@@ -78,7 +80,8 @@ class FloatingText extends Human {
 	public function sendNameTag(Player $player): void {
         $pk = new SetActorDataPacket();
         $pk->actorRuntimeId = $this->getId();
-        $pk->metadata = [EntityMetadataProperties::NAMETAG => new StringMetadataProperty($this->getNameTag())];
+	$text = $this->getNameTag();
+        $pk->metadata = [EntityMetadataProperties::NAMETAG => new StringMetadataProperty($text)];
         $player->getNetworkSession()->sendDataPacket($pk);
     }
 
